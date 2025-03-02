@@ -21,5 +21,6 @@ namespace GameEngine
 
         [SerializeField]
         private int amount;
+        
     }
 }
