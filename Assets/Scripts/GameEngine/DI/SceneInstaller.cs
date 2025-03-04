@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 namespace GameEngine.DI
@@ -9,6 +10,8 @@ namespace GameEngine.DI
         public override void InstallBindings()
         {
             Container.Bind<MoneyStorage>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<GameContext>().AsSingle();
+            Container.Bind<ISaveLoader>().To<MoneySaveLoader>().FromNew().AsSingle();
         }
     }  
 }

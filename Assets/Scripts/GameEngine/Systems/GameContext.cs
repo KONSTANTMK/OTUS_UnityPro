@@ -3,16 +3,14 @@ using Zenject;
 
 namespace GameEngine
 {
-    public class GameContext:MonoBehaviour
+    public class GameContext
     {
-        public MoneyStorage MoneyStorage { get => moneyStorage; }
-        private MoneyStorage moneyStorage;
-        
-            
+        public MoneyStorage MoneyStorage { get; private set; }
+
         [Inject]
         public void Construct(MoneyStorage moneyStorage)
         {
-            this.moneyStorage = moneyStorage;
+            MoneyStorage = moneyStorage;
         }
     }
 }

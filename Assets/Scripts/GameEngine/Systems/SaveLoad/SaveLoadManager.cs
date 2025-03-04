@@ -1,30 +1,40 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection.Emit;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Zenject;
 
 namespace GameEngine
 {
     public class SaveLoadManager:MonoBehaviour
     {
-        private ISaveLoader saveLoader;
-
-        public void Awake()
+        private IEnumerable<ISaveLoader> saveLoaders;
+        private GameContext gameContext;
+        
+        [Inject]
+        public void Construct(GameContext gameContext, IEnumerable<ISaveLoader> saveLoaders) 
         {
-            saveLoader = new MoneySaveLoader();
+            this.gameContext = gameContext;
+            this.saveLoaders = saveLoaders;
         }
-
+        
         [Button]
         public void Load()
         {
-            var gameContext = gameObject.GetComponent<GameContext>();
-            saveLoader.LoadGame(gameContext);
+            foreach (var saveLoader in saveLoaders)
+            {
+                saveLoader.LoadGame(gameContext);
+            }
         }
         
         [Button]
         public void Save()
         {
-            var gameContext = gameObject.GetComponent<GameContext>();
-            saveLoader.SaveGame(gameContext);
+            foreach (var saveLoader in saveLoaders)
+            {
+                saveLoader.SaveGame(gameContext);
+            }
         }
     }
 }

@@ -4,11 +4,6 @@ using UnityEngine.UI;
 
 namespace GameEngine
 {
-    public interface ISaveLoader
-    {
-        void SaveGame(GameContext gameContext);
-        void LoadGame(GameContext gameContext);
-    }
     public class MoneySaveLoader : ISaveLoader
     {
         void ISaveLoader.SaveGame(GameContext gameContext)
