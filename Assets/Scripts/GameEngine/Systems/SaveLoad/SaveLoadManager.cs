@@ -11,29 +11,34 @@ namespace GameEngine
     {
         private IEnumerable<ISaveLoader> saveLoaders;
         private GameContext gameContext;
+        private GameRepository gameRepository;
         
         [Inject]
-        public void Construct(GameContext gameContext, IEnumerable<ISaveLoader> saveLoaders) 
+        public void Construct(GameContext gameContext, IEnumerable<ISaveLoader> saveLoaders, GameRepository gameRepository) 
         {
             this.gameContext = gameContext;
             this.saveLoaders = saveLoaders;
+            this.gameRepository = gameRepository;
         }
         
         [Button]
-        public void Load()
+        public void SaveGame()
         {
             foreach (var saveLoader in saveLoaders)
             {
-                saveLoader.LoadGame(gameContext);
+                saveLoader.SaveGame(gameContext,gameRepository);
             }
+            gameRepository.SaveState();
         }
-        
+
         [Button]
-        public void Save()
+        public void LoadGame()
         {
+            gameRepository.LoadState();
+            
             foreach (var saveLoader in saveLoaders)
             {
-                saveLoader.SaveGame(gameContext);
+                saveLoader.LoadGame(gameContext, gameRepository);
             }
         }
     }

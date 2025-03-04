@@ -12,6 +12,7 @@ namespace GameEngine.DI
             Container.Bind<MoneyStorage>().FromComponentInHierarchy().AsSingle();
             Container.Bind<GameContext>().AsSingle();
             Container.Bind<ISaveLoader>().To<MoneySaveLoader>().FromNew().AsSingle();
+            Container.Bind<GameRepository>().AsSingle();
         }
     }  
 }

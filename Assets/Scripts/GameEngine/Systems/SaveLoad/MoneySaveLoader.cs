@@ -6,19 +6,25 @@ namespace GameEngine
 {
     public class MoneySaveLoader : ISaveLoader
     {
-        void ISaveLoader.SaveGame(GameContext gameContext)
+        void ISaveLoader.SaveGame(GameContext gameContext, IGameRepository gameRepository)
         {
             var moneyStorage = gameContext.MoneyStorage;
-            PlayerPrefs.SetInt("Lesson/Money", moneyStorage.Money);
+            gameRepository.SetData(moneyStorage.Money);
             Debug.Log($"Money saved: {moneyStorage.Money}");
         }
 
-        void ISaveLoader.LoadGame(GameContext gameContext)
+        void ISaveLoader.LoadGame(GameContext gameContext, IGameRepository gameRepository)
         {
             var moneyStorage = gameContext.MoneyStorage;
-            var value = PlayerPrefs.GetInt("Lesson/Money");
-            moneyStorage.SetupMoney(value);
-            Debug.Log($"Money loaded: {value}");
+            if (gameRepository.TryGetData(out int money))
+            {
+                moneyStorage.SetupMoney(money);
+                Debug.Log($"Money loaded: {money}");
+            }
+            else
+            {
+                Debug.Log($"Money not loaded");
+            }
         }
     }
 }
