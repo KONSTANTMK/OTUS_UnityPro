@@ -8,7 +8,7 @@ namespace GameEngine
 {
     //Нельзя менять!
     [Serializable]
-    public sealed class UnitManager
+    public sealed class UnitService
     {
         [SerializeField]
         private Transform container;
@@ -16,11 +16,11 @@ namespace GameEngine
         [ShowInInspector, ReadOnly]
         private HashSet<Unit> sceneUnits = new();
 
-        public UnitManager()
+        public UnitService()
         {
         }
 
-        public UnitManager(Transform container)
+        public UnitService(Transform container)
         {
             this.container = container;
         }
