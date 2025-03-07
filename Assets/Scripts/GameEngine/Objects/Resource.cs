@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GameEngine
+namespace GameEngine.Objects
 {
     //Нельзя менять!
     public sealed class Resource : MonoBehaviour

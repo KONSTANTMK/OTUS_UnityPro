@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using SaveSystem.Data;
-using UnityEngine;
+using GameEngine.Data;
+using GameEngine.Objects;
+using GameEngine.Services;
 
-namespace GameEngine
+namespace GameEngine.SaveLoad
 {
     public class ResourceSaveLoader : SaveLoader<ResourceService, ResourceData[]>
     {

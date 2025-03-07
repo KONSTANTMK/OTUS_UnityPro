@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GameEngine
+namespace GameEngine.Services
 {
     public class MoneyService: MonoBehaviour
     {

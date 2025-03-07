@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using GameEngine.Data;
+using GameEngine.Services;
 
-namespace GameEngine
+namespace GameEngine.SaveLoad
 {
     public class MoneySaveLoader : SaveLoader<MoneyService, MoneyData>
     {

@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameEngine.Objects;
 using Sirenix.OdinInspector;
 
-namespace GameEngine
+namespace GameEngine.Services
 {
     //Нельзя менять!
     [Serializable]

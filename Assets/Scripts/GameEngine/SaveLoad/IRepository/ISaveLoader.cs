@@ -1,4 +1,4 @@
-﻿namespace GameEngine
+﻿namespace GameEngine.SaveLoad
 {
     public interface ISaveLoader
     {

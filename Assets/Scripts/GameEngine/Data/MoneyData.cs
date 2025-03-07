@@ -1,6 +1,6 @@
 using System;
 
-namespace GameEngine
+namespace GameEngine.Data
 {
     [Serializable]
     public class MoneyData

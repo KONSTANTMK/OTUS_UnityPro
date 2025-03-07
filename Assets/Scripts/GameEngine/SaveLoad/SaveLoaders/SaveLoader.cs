@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GameEngine
+namespace GameEngine.SaveLoad
 {
     public abstract class SaveLoader<TService,TData> : ISaveLoader
     {

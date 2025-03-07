@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace GameEngine
+namespace GameEngine.SaveLoad
 {
     public class GameRepository : IGameRepository
     {

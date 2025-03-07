@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
 
-namespace GameEngine
+namespace GameEngine.SaveLoad
 {
     public class SaveLoadManager:MonoBehaviour
     {
