@@ -2,7 +2,7 @@
 
 namespace GameEngine
 {
-    public class MoneyStorage: MonoBehaviour
+    public class MoneyService: MonoBehaviour
     {
         public int Money { get => money;}
         

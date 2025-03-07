@@ -1,28 +1,46 @@
+using System.Collections.Generic;
+using System.Linq;
+using SaveSystem.Data;
 using UnityEngine;
 
 namespace GameEngine
 {
-    public class ResourceSaveLoader :  ISaveLoader
+    public class ResourceSaveLoader : SaveLoader<ResourceService, ResourceData[]>
     {
-        void ISaveLoader.SaveGame(GameContext gameContext, IGameRepository gameRepository)
+        protected override ResourceData[] ConvertToData(ResourceService service)
         {
-            var moneyStorage = gameContext.MoneyStorage;
-            gameRepository.SetData(moneyStorage.Money);
-            Debug.Log($"Money saved: {moneyStorage.Money}");
-        }
+            var resources = service.GetResources();
+            
+            var resourceArray = resources.ToArray();
+            
+            ResourceData[] dataArray = new ResourceData[resourceArray.Length];
 
-        void ISaveLoader.LoadGame(GameContext gameContext, IGameRepository gameRepository)
+            for (int i = 0; i < resourceArray.Length; i++)
+            {
+                var resource = resourceArray[i];
+                dataArray[i] = new ResourceData
+                {
+                    id = resource.ID,
+                    amount = resource.Amount
+                };
+            }
+
+            return dataArray;
+        }
+        
+
+        override protected void SetupData(ResourceService service, ResourceData[] dataArray)
         {
-            var moneyStorage = gameContext.MoneyStorage;
-            if (gameRepository.TryGetData(out int money))
+            IEnumerable<Resource> resources = service.GetResources();
+
+            var enumerable = resources as Resource[] ?? resources.ToArray();
+            foreach (var resource in enumerable)
             {
-                moneyStorage.SetupMoney(money);
-                Debug.Log($"Money loaded: {money}");
+                var data = dataArray.FirstOrDefault(d => d.id == resource.ID);
+                resource.Amount = data.amount;
             }
-            else
-            {
-                Debug.Log($"Money not loaded");
-            }
+            
+            service.SetResources(enumerable);
         }
     }
 }
