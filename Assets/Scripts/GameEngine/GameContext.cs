@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Codice.CM.Common.Merge;
 using GameEngine.Objects;
 using GameEngine.Services;
 using Zenject;
@@ -9,21 +10,25 @@ namespace GameEngine
     public class GameContext
     {
         public MoneyService moneyService;
-
-        //private ISaveLoader[] SaveLoaders;
+        
         private readonly List<object> services = new ();
         
         private IEnumerable<Resource> resources;
         private ResourceService resourceService;
+        
+        private IEnumerable<Unit> units;
+        private UnitService unitService;
 
         [Inject]
-        public void Construct(MoneyService moneyService, ResourceService resourceService, IEnumerable<Resource> resources)
+        public void Construct(MoneyService moneyService, ResourceService resourceService, IEnumerable<Resource> resources, UnitService unitService,IEnumerable<Unit> units)
         {
             this.moneyService = moneyService;
             services.Add(moneyService);
-           // SaveLoaders = saveLoaders;
            
-           
+           this.unitService = unitService;
+           this.units = units;
+           this.unitService.SetupUnits(this.units);
+           services.Add(unitService);
            
             this.resourceService = resourceService;
             this.resources = resources;

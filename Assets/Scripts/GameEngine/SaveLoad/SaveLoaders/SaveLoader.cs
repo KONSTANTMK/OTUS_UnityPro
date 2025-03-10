@@ -27,10 +27,7 @@ namespace GameEngine.SaveLoad
             }
         }
 
-        protected virtual void SetupDefaultData(TService service, TData data)
-        {
-            
-        }
+        protected virtual void SetupDefaultData(TService service, TData data) {}
         protected abstract TData ConvertToData(TService service);
         protected abstract void SetupData(TService service,TData data);
     }
