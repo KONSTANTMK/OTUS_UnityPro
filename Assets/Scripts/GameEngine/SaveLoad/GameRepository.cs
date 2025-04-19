@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using GameEngine.AES;
 using Newtonsoft.Json;
@@ -46,25 +47,43 @@ namespace GameEngine.SaveLoad
             
             string encryptedJson = JsonConvert.SerializeObject(encryptedSaveStruct);
             
-            PlayerPrefs.SetString(GAME_STATE_KEY, encryptedJson);
+            var savePath = Path.Combine(Application.persistentDataPath, "save.json");
+            
+            try
+            {
+                File.WriteAllText(savePath, contents: encryptedJson);
+                Debug.Log(message: "Successfully Saved");
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(message: "Save Failed"+ex);
+            }
         }
 
         public void LoadState()
         {
-            if (PlayerPrefs.HasKey(GAME_STATE_KEY))
+            var savePath = Path.Combine(Application.persistentDataPath, "save.json");
+            
+            if (!File.Exists(savePath))
             {
-                var encryptedJson = PlayerPrefs.GetString(GAME_STATE_KEY);
+                Debug.Log(message: "Save File Not Found");
+                return;
+            }
+
+            try
+            {
+                string encryptedJson = File.ReadAllText(savePath);
                 
                 byte[] encryptedData = JsonConvert.DeserializeObject<EncryptedSaveStruct>(encryptedJson).Data;
                 
                 var gameStateJson = encryptComponent.Decrypt(encryptedData);
                 
                 gameState = JsonConvert.DeserializeObject<Dictionary<string, string>>(gameStateJson);
-                Debug.Log($"Game state loaded: {gameStateJson}");
             }
-            else
+
+            catch (Exception)
             {
-                Debug.Log($"Game state not loaded");
+                Debug.Log(message: "Save Data Not Read");
             }
         }
         
