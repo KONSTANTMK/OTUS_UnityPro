@@ -7,9 +7,8 @@ using Zenject;
 
 namespace GameEngine
 {
-    public class GameContext
-    {
-        public MoneyService moneyService;
+    public class GameContext{
+    
         
         private readonly List<object> services = new ();
         
@@ -20,11 +19,8 @@ namespace GameEngine
         private UnitService unitService;
 
         [Inject]
-        public void Construct(MoneyService moneyService, ResourceService resourceService, IEnumerable<Resource> resources, UnitService unitService,IEnumerable<Unit> units)
+        public void Construct(ResourceService resourceService, IEnumerable<Resource> resources, UnitService unitService,IEnumerable<Unit> units)
         {
-            this.moneyService = moneyService;
-            services.Add(moneyService);
-           
            this.unitService = unitService;
            this.units = units;
            this.unitService.SetupUnits(this.units);

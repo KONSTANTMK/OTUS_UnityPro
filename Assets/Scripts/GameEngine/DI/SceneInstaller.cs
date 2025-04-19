@@ -26,11 +26,8 @@ namespace GameEngine.DI
             Container.Bind<IEnumerable<Unit>>().FromInstance(units).AsCached().NonLazy();
             Container.Bind<UnitService>().FromNew().AsCached().NonLazy();
             
-            Container.Bind<MoneyService>().FromComponentInHierarchy().AsSingle();
-            
             Container.Bind<GameContext>().AsSingle();
             
-            Container.Bind<ISaveLoader>().To<MoneySaveLoader>().FromNew().AsSingle();
             Container.Bind<ISaveLoader>().To<ResourceSaveLoader>().AsCached().NonLazy();
             Container.Bind<ISaveLoader>().To<UnitsSaveLoader>().AsCached().NonLazy();
             
