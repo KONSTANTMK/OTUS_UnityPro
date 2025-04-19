@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using GameEngine.AES;
 using GameEngine.Objects;
 using GameEngine.SaveLoad;
 using GameEngine.Services;
@@ -32,8 +33,10 @@ namespace GameEngine.DI
             Container.Bind<ISaveLoader>().To<UnitsSaveLoader>().AsCached().NonLazy();
             
             Container.Bind<GameRepository>().AsSingle();
-            
-            
+
+            Container.Bind<AesEncryptComponent>().AsSingle();
+
+
         }
     }  
 }
