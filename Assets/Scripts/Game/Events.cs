@@ -45,4 +45,6 @@ namespace Game
 
     // UI/SFX (чтобы не звать Audio напрямую)
     public struct PlaySfx : IGameEvent { public string Key { get; set; } }
+    
+    public struct EndTurnRequested : IGameEvent { }
 }
