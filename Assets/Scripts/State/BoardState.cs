@@ -14,19 +14,20 @@ namespace State
         {
             Red.Clear(); Blue.Clear(); _order.Clear(); _cursor = 0;
 
-            // Временная расстановка: 4 на 4, индексы 0..7
-            for (int i = 0; i < 4; i++)
-            {
-                Red.Add(new Hero { Index = i * 2,     Team = TeamId.Red,  Name = $"R{i}" });
-                Blue.Add(new Hero{ Index = i * 2 + 1, Team = TeamId.Blue, Name = $"B{i}" });
-            }
+            // Пример: R0=Paladin (с щитом), R1=Huntress, R2=IceMage, R3=Devourer
+            Red.Add(new Hero { Index = 0, Team = TeamId.Red,  Name = "R0 Paladin",  Kind = HeroKind.Paladin,  DivineShield = true });
+            Red.Add(new Hero { Index = 2, Team = TeamId.Red,  Name = "R1 Huntress", Kind = HeroKind.Huntress });
+            Red.Add(new Hero { Index = 4, Team = TeamId.Red,  Name = "R2 IceMage",  Kind = HeroKind.IceMage });
+            Red.Add(new Hero { Index = 6, Team = TeamId.Red,  Name = "R3 Devourer", Kind = HeroKind.Devourer });
 
-            // Фиксированный порядок: R0, B0, R1, B1, R2, B2, R3, B3
-            for (int i = 0; i < 4; i++)
-            {
-                _order.Add(Red[i]);
-                _order.Add(Blue[i]);
-            }
+            // Пример: B0=DumbOrc, B1=LordVamp, B2=Electro, B3=Meditator
+            Blue.Add(new Hero { Index = 1, Team = TeamId.Blue, Name = "B0 Orc",      Kind = HeroKind.DumbOrc });
+            Blue.Add(new Hero { Index = 3, Team = TeamId.Blue, Name = "B1 Vamp",     Kind = HeroKind.LordVamp });
+            Blue.Add(new Hero { Index = 5, Team = TeamId.Blue, Name = "B2 Electro",  Kind = HeroKind.Electro });
+            Blue.Add(new Hero { Index = 7, Team = TeamId.Blue, Name = "B3 Medit",    Kind = HeroKind.Meditator });
+
+            // порядок ходов как раньше
+            for (int i = 0; i < 4; i++) { _order.Add(Red[i]); _order.Add(Blue[i]); }
         }
 
         public Hero NextActive()
