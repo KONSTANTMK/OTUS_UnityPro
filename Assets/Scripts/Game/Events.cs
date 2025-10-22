@@ -10,12 +10,30 @@ namespace Game
     public struct TurnEnded   : IGameEvent { public int ActiveIndex { get; set; } }
 
     // Боевая логика
-    public struct AttackRequested : IGameEvent
+    public class AttackRequested
     {
-        public int AttackerIndex { get; set; }
-        public int TargetIndex   { get; set; }
-    }
+        public int AttackerIndex;
+        public int TargetIndex;
 
+        public AttackRequested(int attackerIndex, int targetIndex)
+        {
+            AttackerIndex = attackerIndex;
+            TargetIndex = targetIndex;
+        }
+    }
+    
+    public class AttackEvent
+    {
+        public readonly IEntity Source;
+        public readonly IEntity Target;
+
+        public AttackEvent(IEntity source, IEntity target)
+        {
+            Source = source;
+            Target = target;
+        }
+    }
+    
     public struct DamageApplied : IGameEvent
     {
         public int SourceIndex   { get; set; }

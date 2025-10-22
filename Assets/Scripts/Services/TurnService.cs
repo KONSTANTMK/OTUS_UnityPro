@@ -1,7 +1,6 @@
 ﻿using System;
 using Zenject;
 using UnityEngine;
-using Core.EventBus;
 using Game;
 using State;
 
